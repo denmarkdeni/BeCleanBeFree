@@ -1,1 +1,7 @@
-welcome to {{ app_name }}!
+<h1>Welcome to BeCleanBeFree 🕊️</h1>
+{% if user.is_authenticated %}
+  <p>Hello, {{ user.username }} |(Role: {{ user.profile.role }})| <a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+  <a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a>
+{% endif %}
+ 
