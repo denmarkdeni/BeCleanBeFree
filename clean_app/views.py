@@ -47,7 +47,8 @@ def register(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('login')
+    messages.success(request, 'Logout Successful!')
+    return redirect('register')
 
 def user_dashboard(request):
     return render(request, 'user_dashboard.html')
