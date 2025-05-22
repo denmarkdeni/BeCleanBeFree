@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import UserRegisterForm, UserLoginForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import AwarenessPost, NewsPost, RecoveryTipPost
 
 def home(request):
     return render(request, 'home.html')
@@ -34,7 +36,7 @@ def register(request):
                 if user.is_superuser:
                     return redirect('admin_dashboard')
                 elif user.profile.role == 'counselor':
-                    return redirect('Counselor_dashboard')
+                    return redirect('counselor_dashboard')
                 elif user.profile.role == 'user':
                     return redirect('user_dashboard')
             else:
@@ -58,3 +60,67 @@ def counselor_dashboard(request):
 
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
+
+@login_required
+def upload_awareness_post(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        # category = request.POST['category']
+        image = request.FILES.get('image')
+        video_link = request.POST.get('video_link')
+
+        post = AwarenessPost.objects.create(
+            title=title,
+            content=content,
+            image=image,
+            video_link=video_link,
+            posted_by=request.user,
+            is_approved=False  # Wait for admin approval
+        )
+        messages.success(request, 'Awareness post uploaded successfully!')
+        return redirect('upload_awareness') 
+
+    return render(request, 'post_upload_pages/upload_awareness_post.html')
+
+@login_required
+def upload_news_post(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        image = request.FILES.get('image')
+        source_link = request.POST.get('source_link')
+
+        NewsPost.objects.create(
+            title=title,
+            content=content,
+            image=image,
+            source_link=source_link,
+            posted_by=request.user,
+            is_approved=False
+        )
+        messages.success(request, 'News post uploaded successfully!')
+        return redirect('upload_news')
+
+    return render(request, 'post_upload_pages/upload_news_post.html')
+
+@login_required
+def upload_recovery_tip(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        category = request.POST['category']
+        image = request.FILES.get('image')
+
+        RecoveryTipPost.objects.create(
+            title=title,
+            content=content,
+            category=category,
+            image=image,
+            posted_by=request.user,
+            is_approved=False
+        )
+        messages.success(request, 'Recovery Tips uploaded successfully!')
+        return redirect('upload_recovery')
+
+    return render(request, 'post_upload_pages/upload_recovery_tip.html')

@@ -27,4 +27,8 @@ urlpatterns = [
     path('dashboard/admin/', views.admin_dashboard, name='admin_dashboard'),
     path('dashboard/user/', views.user_dashboard, name='user_dashboard'),
     path('dashboard/counselor/', views.counselor_dashboard, name='counselor_dashboard'),
+
+    path('upload/awareness/', views.upload_awareness_post, name='upload_awareness'),
+    path('upload/news/', views.upload_news_post, name='upload_news'),
+    path('upload/recovery/', views.upload_recovery_tip, name='upload_recovery'),
 ]

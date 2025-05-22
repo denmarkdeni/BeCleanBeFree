@@ -4019,6 +4019,9 @@ table.dataTable thead tr >.dtfc-fixed-start:is([data-pc-theme="dark"] *),table.d
 .ml-2{
   margin-left: 0.5rem;
 }
+.ml-200{
+  margin-left: 200px;
+}
 .ml-2\.5{
   margin-left: 0.625rem;
 }
@@ -4261,6 +4264,9 @@ table.dataTable thead tr >.dtfc-fixed-start:is([data-pc-theme="dark"] *),table.d
 }
 .max-w-\[350px\]{
   max-width: 350px;
+}
+.max-w-\[700px\]{
+  max-width: 700px;
 }
 .max-w-\[50\%\]{
   max-width: 50%;

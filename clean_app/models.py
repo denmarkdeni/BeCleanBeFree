@@ -15,3 +15,47 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"
+
+class AwarenessPost(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='awareness_images/', blank=True, null=True)
+    video_link = models.URLField(blank=True, null=True)
+    posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_approved = models.BooleanField(default=False)  # Admin moderation
+
+    def __str__(self):
+        return self.title
+    
+class NewsPost(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='news_images/', blank=True, null=True)
+    source_link = models.URLField(blank=True, null=True)
+    posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"News: {self.title}"
+
+class RecoveryTipPost(models.Model):
+    CATEGORY_CHOICES = [
+        ('nutrition', 'Nutrition'),
+        ('mental', 'Mental Health'),
+        ('physical', 'Physical Health'),
+        ('medicine', 'Medicine'),
+    ]
+
+    title = models.CharField(max_length=255)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    content = models.TextField()
+    image = models.ImageField(upload_to='recovery_images/', blank=True, null=True)
+    posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.title} - {self.get_category_display()}"
