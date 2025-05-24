@@ -273,61 +273,23 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                     </div>
                 </div>
                 <div class="training-carousel owl-carousel pt-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="training-img rounded-top">
-                            <img src="/static/img/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">01</h1>
+
+                    {% for post in awareness_posts %}
+                        {% with delay=forloop.counter0|add:"0" %}
+                        <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.{{ delay|add:"2" }}s">
+                            <div class="training-img rounded-top position-relative">
+                                <img src="{{ post.image.url }}" class="img-fluid rounded-top w-100 h-250" alt="Image">
+                                <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">{{ forloop.counter|stringformat:"02d" }} </h1>
+                            </div>
+                            <div class="rounded-bottom border border-top-0 p-4">
+                                <a href="#" class="h4 mb-3 d-block">{{ post.title }}</a>
+                                <p class="mb-3">{{ post.content|truncatewords:20 }}</p>
+                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
+                            </div>
                         </div>
-                        <div class="rounded-bottom border border-top-0 p-4">
-                            <a href="#" class="h4 mb-3 d-block">Dance Theater</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="training-img rounded-top">
-                            <img src="/static/img/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">02</h1>
-                        </div>
-                        <div class="rounded-bottom border border-top-0 p-4">
-                            <a href="#" class="h4 mb-3 d-block">Personalized Learning</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="training-img rounded-top">
-                            <img src="/static/img/service-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">03</h1>
-                        </div>
-                        <div class="rounded-bottom border border-top-0 p-4">
-                            <a href="#" class="h4 mb-3 d-block">Convenient Dancing</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="training-img rounded-top">
-                            <img src="/static/img/service-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">04</h1>
-                        </div>
-                        <div class="rounded-bottom border border-top-0 p-4">
-                            <a href="#" class="h4 mb-3 d-block">Dance Theater</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="training-item bg-white rounded wow fadeInUp" data-wow-delay="0.9s">
-                        <div class="training-img rounded-top">
-                            <img src="/static/img/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <h1 class="fs-1 fw-bold bg-primary text-white d-inline-block rounded p-2 position-absolute" style="top: 0; left: 0;">05</h1>
-                        </div>
-                        <div class="rounded-bottom border border-top-0 p-4">
-                            <a href="#" class="h4 mb-3 d-block">Personalized Learning</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
+                        {% endwith %}
+                    {% endfor %}
+
                 </div>
             </div>
         </div>
@@ -496,62 +458,30 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                     <h1 class="display-2 mb-0 wow fadeInUp" data-wow-delay="0.3s">Our Latest News & Updates</h1>
                 </div>
                 <div class="blog-carousel owl-carousel pt-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="blog-item bg-white rounded wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="blog-img rounded-top">
-                            <img src="/static/img/class-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                        </div>
-                        <div class="bg-light rounded-bottom p-4">
-                            <div class="d-flex justify-content-between mb-4">
-                                <a href="#" class="text-muted"><i class="fa fa-calendar-alt text-primary"></i> 28 August 2021</a>
-                                <a href="#" class="text-muted"><span class="fa fa-comments text-primary"></span> 3 Comments</a>
+
+                {% for post in news_posts %}
+                    {% with delay=forloop.counter0|add:"1" %}
+                        <div class="blog-item bg-white rounded wow fadeInUp" data-wow-delay="0.{{ delay }}s">
+                            <div class="blog-img rounded-top">
+                                <img src="{{ post.image.url }}" class="img-fluid rounded-top w-100 h-250" alt="News Image">
                             </div>
-                            <a href="#" class="h4 mb-3 d-block">Classical Dance class</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="blog-item bg-white rounded wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="blog-img rounded-top">
-                            <img src="/static/img/class-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                        </div>
-                        <div class="bg-light rounded-bottom p-4">
-                            <div class="d-flex justify-content-between mb-4">
-                                <a href="#" class="text-muted"><i class="fa fa-calendar-alt text-primary"></i> 28 August 2021</a>
-                                <a href="#" class="text-muted"><span class="fa fa-comments text-primary"></span> 3 Comments</a>
+                            <div class="bg-light rounded-bottom p-4">
+                                <div class="d-flex justify-content-between mb-4">
+                                    <a href="#" class="text-muted">
+                                        <i class="fa fa-calendar-alt text-primary"></i> {{ post.created_at|date:"d M Y" }}
+                                    </a>
+                                    <a href="#" class="text-muted">
+                                        <span class="fa fa-comments text-primary"></span> 0 Comments
+                                    </a>
+                                </div>
+                                <a href="#" class="h4 mb-3 d-block">{{ post.title }}</a>
+                                <p class="mb-3">{{ post.content|truncatechars:120 }}</p>
+                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
                             </div>
-                            <a href="#" class="h4 mb-3 d-block">Classical Dance class</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
                         </div>
-                    </div>
-                    <div class="blog-item bg-white rounded wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="blog-img rounded-top">
-                            <img src="/static/img/class-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                        </div>
-                        <div class="bg-light rounded-bottom p-4">
-                            <div class="d-flex justify-content-between mb-4">
-                                <a href="#" class="text-muted"><i class="fa fa-calendar-alt text-primary"></i> 28 August 2021</a>
-                                <a href="#" class="text-muted"><span class="fa fa-comments text-primary"></span> 3 Comments</a>
-                            </div>
-                            <a href="#" class="h4 mb-3 d-block">Classical Dance class</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="blog-item bg-white rounded wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="blog-img rounded-top">
-                            <img src="/static/img/class-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                        </div>
-                        <div class="bg-light rounded-bottom p-4">
-                            <div class="d-flex justify-content-between mb-4">
-                                <a href="#" class="text-muted"><i class="fa fa-calendar-alt text-primary"></i> 28 August 2021</a>
-                                <a href="#" class="text-muted"><span class="fa fa-comments text-primary"></span> 3 Comments</a>
-                            </div>
-                            <a href="#" class="h4 mb-3 d-block">Classical Dance class</a>
-                            <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Read More</a>
-                        </div>
-                    </div>
+                    {% endwith %}
+                {% endfor %}
+                  
                 </div>
             </div>
         </div>
@@ -662,22 +592,22 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                         </li>
                         <li class="nav-item bg-light border border-primary rounded-pill mb-4">
                             <a class="d-flex py-2 px-5 rounded-pill" data-bs-toggle="pill" href="#GalleryTab-2">
-                                <span class="text-dark">Dance Practice</span>
+                                <span class="text-dark">Nutrition</span>
                             </a>
                         </li>
                         <li class="nav-item bg-light border border-primary rounded-pill mb-4">
                             <a class="d-flex py-2 px-5 rounded-pill" data-bs-toggle="pill" href="#GalleryTab-3">
-                                <span class="text-dark">Dance Training</span>
+                                <span class="text-dark">Mental Health</span>
                             </a>
                         </li>
                         <li class="nav-item bg-light border border-primary rounded-pill mb-4">
                             <a class="d-flex py-2 px-5 rounded-pill" data-bs-toggle="pill" href="#GalleryTab-4">
-                                <span class="text-dark">Dance Growth</span>
+                                <span class="text-dark">Physical Health</span>
                             </a>
                         </li>
                         <li class="nav-item bg-light border border-primary rounded-pill mb-4">
                             <a class="d-flex py-2 px-5 rounded-pill" data-bs-toggle="pill" href="#GalleryTab-5">
-                                <span class="text-dark">Dance Improvement</span>
+                                <span class="text-dark">Medicine</span>
                             </a>
                         </li>
                     </ul>
@@ -685,422 +615,126 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                     <div class="tab-content">
                         <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
                             <div class="row g-2">
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 wow fadeInUp" data-wow-delay="0.5s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 wow fadeInUp" data-wow-delay="0.9s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="0.5s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="0.9s">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
+
+
+                                {% for post in recovery_posts %}
+                                    {% with delay=forloop.counter0|add:"1" %}
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.{{ delay }}s">
+                                            <div class="video h-100">
+                                                <img src="{{ post.image.url }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="{{ post.title }}">
+                                                <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="{{ post.video_link }}" data-bs-target="#videoModal">
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+                                {% endfor %}
+
+
                             </div>
                         </div>
                         <div id="GalleryTab-2" class="tab-pane fade show p-0">
                             <div class="row g-2">
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
+
+                                {% if recovery_post_nutrition %}
+                                    {% for post in recovery_post_nutrition %}
+                                        {% with delay=forloop.counter0|add:"1" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" data-wow-delay="0.{{ delay }}s">
+                                                <div class="video h-100">
+                                                    <img src="{{ post.image.url }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="{{ post.title }}">
+                                                    {% if post.video_link %}
+                                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="{{ post.video_link }}" data-bs-target="#videoModal">
+                                                            <span></span>
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">No nutrition posts available.</p>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                         <div id="GalleryTab-3" class="tab-pane fade show p-0">
                             <div class="row g-2">
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
+
+                                {% if recovery_post_mental %}
+                                    {% for post in recovery_post_mental %}
+                                        {% with delay=forloop.counter0|add:"1" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" data-wow-delay="0.{{ delay }}s">
+                                                <div class="video h-100">
+                                                    <img src="{{ post.image.url }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="{{ post.title }}">
+                                                    {% if post.video_link %}
+                                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="{{ post.video_link }}" data-bs-target="#videoModal">
+                                                            <span></span>
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">No Mental Health posts available.</p>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                         <div id="GalleryTab-4" class="tab-pane fade show p-0">
                             <div class="row g-2">
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
+                                
+                                {% if recovery_post_physical %}
+                                    {% for post in recovery_post_physical %}
+                                        {% with delay=forloop.counter0|add:"1" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" data-wow-delay="0.{{ delay }}s">
+                                                <div class="video h-100">
+                                                    <img src="{{ post.image.url }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="{{ post.title }}">
+                                                    {% if post.video_link %}
+                                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="{{ post.video_link }}" data-bs-target="#videoModal">
+                                                            <span></span>
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">No Physical Health posts available.</p>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                         <div id="GalleryTab-5" class="tab-pane fade show p-0">
                             <div class="row g-2">
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
+                                
+                                {% if recovery_post_medicine %}
+                                    {% for post in recovery_post_medicine %}
+                                        {% with delay=forloop.counter0|add:"1" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3" data-wow-delay="0.{{ delay }}s">
+                                                <div class="video h-100">
+                                                    <img src="{{ post.image.url }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="{{ post.title }}">
+                                                    {% if post.video_link %}
+                                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="{{ post.video_link }}" data-bs-target="#videoModal">
+                                                            <span></span>
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">No Medicine posts available.</p>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-2.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-1.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                                    <div class="video h-100">
-                                        <img src="/static/img/class-3.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
-                                        <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>

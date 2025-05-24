@@ -56,6 +56,48 @@ class RecoveryTipPost(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
+    video_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} - {self.get_category_display()}"
+
+class Quiz(models.Model):
+    CATEGORY_CHOICES = [
+        ('nutrition', 'Nutrition'),
+        ('mental', 'Mental Health'),
+        ('physical', 'Physical Health'),
+        ('medicine', 'Medicine'),
+    ]
+
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.title} ({self.get_category_display()})"
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
+    question_text = models.TextField()
+    
+    def __str__(self):
+        return self.question_text
+
+class Option(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='options')
+    option_text = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)  
+
+    def __str__(self):
+        return self.option_text
+
+class UserQuizResult(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    score = models.FloatField(default=0.0)
+    completed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.quiz.title} - {self.score}"

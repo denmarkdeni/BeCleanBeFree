@@ -7,7 +7,23 @@ from django.contrib.auth.decorators import login_required
 from .models import AwarenessPost, NewsPost, RecoveryTipPost
 
 def home(request):
-    return render(request, 'home.html')
+    awareness_posts = AwarenessPost.objects.all().order_by('-created_at')[:15]
+    news_posts = NewsPost.objects.all().order_by('-created_at')[:15]
+    recovery_posts_all = RecoveryTipPost.objects.all().order_by('-created_at')[:10]
+    recovery_post_nutrition = RecoveryTipPost.objects.filter(category='nutrition').order_by('-created_at')[:10]
+    recovery_post_mental = RecoveryTipPost.objects.filter(category='mental').order_by('-created_at')[:10]
+    recovery_post_physical = RecoveryTipPost.objects.filter(category='physical').order_by('-created_at')[:10]
+    recovery_post_medicine = RecoveryTipPost.objects.filter(category='medicine').order_by('-created_at')[:10]
+    context = {
+        'awareness_posts': awareness_posts,
+        'news_posts': news_posts,
+        'recovery_posts': recovery_posts_all,
+        'recovery_post_nutrition': recovery_post_nutrition,
+        'recovery_post_mental': recovery_post_mental,
+        'recovery_post_physical': recovery_post_physical,
+        'recovery_post_medicine': recovery_post_medicine,
+    }
+    return render(request, 'home.html', context)
 
 def register(request):
     reg_form = UserRegisterForm()
@@ -111,12 +127,14 @@ def upload_recovery_tip(request):
         content = request.POST['content']
         category = request.POST['category']
         image = request.FILES.get('image')
+        video_link = request.POST.get('video_link')
 
         RecoveryTipPost.objects.create(
             title=title,
             content=content,
             category=category,
             image=image,
+            video_link=video_link,
             posted_by=request.user,
             is_approved=False
         )
@@ -124,3 +142,15 @@ def upload_recovery_tip(request):
         return redirect('upload_recovery')
 
     return render(request, 'post_upload_pages/upload_recovery_tip.html')
+
+@login_required
+def upload_quiz(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        description = request.POST['description']
+        category = request.POST['category']
+
+        messages.success(request, 'Quiz uploaded successfully!')
+        return redirect('upload_quiz')
+
+    return render(request, 'post_upload_pages/upload_quiz.html')

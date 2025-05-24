@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from clean_app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +33,8 @@ urlpatterns = [
     path('upload/awareness/', views.upload_awareness_post, name='upload_awareness'),
     path('upload/news/', views.upload_news_post, name='upload_news'),
     path('upload/recovery/', views.upload_recovery_tip, name='upload_recovery'),
+    path('upload/quiz/', views.upload_quiz, name='upload_quiz'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
