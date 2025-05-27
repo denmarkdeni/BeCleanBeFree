@@ -4112,6 +4112,9 @@ table.dataTable thead tr >.dtfc-fixed-start:is([data-pc-theme="dark"] *),table.d
 .h-2{
   height: 0.5rem;
 }
+.h-250 {
+  height: 200px;
+}
 .h-3\.5{
   height: 0.875rem;
 }

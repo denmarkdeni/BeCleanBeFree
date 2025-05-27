@@ -81,37 +81,37 @@
           <i data-feather="feather"></i>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/bc_color.html" class="pc-link">
+          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="server"></i></span>
             <span class="pc-mtext">Awareness Section</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/bc_typography.html" class="pc-link">
+          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="message-square"></i></span>
             <span class="pc-mtext">Reporting Section</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/icon-feather.html" class="pc-link">
+          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="clipboard"></i></span>
             <span class="pc-mtext">Quiz</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/icon-feather.html" class="pc-link">
+          <a href="{% url 'view_news_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="globe"></i></span>
             <span class="pc-mtext">News & Updates</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/icon-feather.html" class="pc-link">
+          <a href="{% url 'view_recovery_tips' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="activity"></i></span>
             <span class="pc-mtext">Recovery Section</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="../elements/icon-feather.html" class="pc-link">
+          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="users"></i></span>
             <span class="pc-mtext">Consultation</span>
           </a>
@@ -279,19 +279,19 @@
         <i data-feather="settings"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-        <a href="#!" class="dropdown-item">
+        <a href="/dashboard" class="dropdown-item">
           <i class="ti ti-user"></i>
           <span>My Account</span>
         </a>
-        <a href="#!" class="dropdown-item">
+        <a href="/dashboard" class="dropdown-item">
           <i class="ti ti-settings"></i>
           <span>Settings</span>
         </a>
-        <a href="#!" class="dropdown-item">
+        <a href="/dashboard" class="dropdown-item">
           <i class="ti ti-headset"></i>
           <span>Support</span>
         </a>
-        <a href="#!" class="dropdown-item">
+        <a href="/dashboard" class="dropdown-item">
           <i class="ti ti-lock"></i>
           <span>Lock Screen</span>
         </a>
@@ -480,6 +480,8 @@
     
  
     <!-- Required Js -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="/static/dashboard/js/plugins/simplebar.min.js"></script>
     <script src="/static/dashboard/js/plugins/popper.min.js"></script>
     <script src="/static/dashboard/js/icon/custom-icon.js"></script>

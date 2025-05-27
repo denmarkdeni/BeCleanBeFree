@@ -49,12 +49,8 @@ def register(request):
                 user = login_form.get_user()
                 login(request, user)
                 messages.success(request, 'Login successful!')
-                if user.is_superuser:
-                    return redirect('admin_dashboard')
-                elif user.profile.role == 'counselor':
-                    return redirect('counselor_dashboard')
-                elif user.profile.role == 'user':
-                    return redirect('user_dashboard')
+                return redirect('dashboard')
+                
             else:
                 messages.error(request, 'Invalid login credentials.')
 
@@ -63,6 +59,17 @@ def register(request):
         'login_form': login_form
     })
 
+def dashboard(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return redirect('admin_dashboard')
+        elif request.user.profile.role == 'counselor':
+            return redirect('counselor_dashboard')
+        elif request.user.profile.role == 'user':
+            return redirect('user_dashboard')
+    else:
+        return redirect('register')  
+    
 def user_logout(request):
     logout(request)
     messages.success(request, 'Logout Successful!')
@@ -154,3 +161,28 @@ def upload_quiz(request):
         return redirect('upload_quiz')
 
     return render(request, 'post_upload_pages/upload_quiz.html')
+
+def view_awareness_posts(request):
+    awareness_posts = AwarenessPost.objects.all().order_by('-created_at')
+    return render(request, 'view_pages/view_awareness_posts.html', {'awareness_posts': awareness_posts})
+
+def view_news_posts(request):
+    news_posts = NewsPost.objects.all().order_by('-created_at')
+    return render(request, 'view_pages/view_news_posts.html', {'news_posts': news_posts})
+
+def view_recovery_tips(request):
+    recovery_tips = RecoveryTipPost.objects.all().order_by('-created_at')
+    return render(request, 'view_pages/view_recovery_tips.html', {'recovery_tips': recovery_tips})
+
+def view_post_details(request, model_type, post_id):
+    if model_type == 'awareness':
+        post = AwarenessPost.objects.filter(id=post_id).first()
+    elif model_type == 'news':
+        post = NewsPost.objects.filter(id=post_id).first()
+    elif model_type == 'recovery':
+        post = RecoveryTipPost.objects.filter(id=post_id).first()
+    else:
+        messages.error(request, 'Invalid post type.')
+        return redirect('user_dashboard')
+    return render(request, 'view_pages/view_post_details.html', {'post': post})
+

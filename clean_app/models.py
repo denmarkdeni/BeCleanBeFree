@@ -20,7 +20,7 @@ class AwarenessPost(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='awareness_images/', blank=True, null=True)
-    video_link = models.URLField(blank=True, null=True)
+    source_link = models.URLField(blank=True, null=True)
     posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -56,7 +56,7 @@ class RecoveryTipPost(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
-    video_link = models.URLField(blank=True, null=True)
+    source_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} - {self.get_category_display()}"

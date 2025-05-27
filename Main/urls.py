@@ -26,6 +26,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.user_logout, name='logout'),
 
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/admin/', views.admin_dashboard, name='admin_dashboard'),
     path('dashboard/user/', views.user_dashboard, name='user_dashboard'),
     path('dashboard/counselor/', views.counselor_dashboard, name='counselor_dashboard'),
@@ -34,6 +35,11 @@ urlpatterns = [
     path('upload/news/', views.upload_news_post, name='upload_news'),
     path('upload/recovery/', views.upload_recovery_tip, name='upload_recovery'),
     path('upload/quiz/', views.upload_quiz, name='upload_quiz'),
+
+    path('view/awareness/', views.view_awareness_posts, name='view_awareness_posts'),
+    path('view/news/', views.view_news_posts, name='view_news_posts'),
+    path('view/recovery/', views.view_recovery_tips, name='view_recovery_tips'),
+    path('view/post/<str:model_type>/<int:post_id>/', views.view_post_details, name='view_post_details'),
 ]
 
 if settings.DEBUG:

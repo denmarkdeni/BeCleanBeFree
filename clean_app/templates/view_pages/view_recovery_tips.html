@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="page-header-title">
+          <h5 class="mb-0 font-medium">Recovery Tips Section</h5>
+        </div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/dashboard/user/">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="javascript: void(0)">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">Recovery</li>
+        </ul>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    {% if recovery_tips %}
+    <div class="grid grid-cols-12 gap-x-6">
+      {% for post in recovery_tips %}
+      <div class="col-span-12 xl:col-span-4">
+        <div
+          class="card card-social rounded-[20px] transition-all duration-300 hover:shadow hover:scale-[1.02]"
+        >
+          <div
+            class="card-body border-b border-theme-border dark:border-themedark-border"
+          >
+            <div class="flex items-center justify-center gap-x-2 mb-3">
+              <h4
+                class="text-xl font-semibold text-center text-blue-600 flex items-center justify-center gap-2"
+              >
+                <i class="fas fa-bullhorn text-primary"></i> {{ post.title }}
+              </h4>
+            </div>
+
+            <!-- 🖼️ Image between title and content -->
+            {% if post.image %}
+            <span
+                class="bg-blue-100 text-blue-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+              >
+                {{ post.category }}
+            </span>
+            <div class="my-3 flex justify-center">
+
+              <img
+                src="{{ post.image.url }}"
+                alt="Awareness Image"
+                class="rounded-[20px] w-full max-h-60 object-cover h-250"
+              />
+            </div>
+
+            <div class="text-xs text-center text-gray-500 mt-2">
+              Posted by <strong>{{ post.posted_by }}</strong> on
+              <i class="fas fa-calendar-alt"></i> {{ post.created_at|date:"M d,Y" }}
+            </div>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <div class="grid grid-cols-12 gap-x-6">
+              <div class="col-span-12">
+                <h6 class="text-center mb-2.5">
+                  <span class="text-muted m-r-5">
+                    {{ post.content|truncatewords:20 }}</span
+                  >
+                </h6>
+              </div>
+            </div>
+            <div class="flex justify-center mt-3">
+              <a
+                href="{% url 'view_post_details' 'recovery' post.id %}"
+                class="text-muted m-r-5 bg-primary hover:bg-gray-500 px-4 py-2 rounded-[10px] transition-all duration-200"
+              >
+                Read More →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="alert alert-warning" role="alert">
+      <strong>No recovery tips available at the moment.</strong> Please check
+      back later.
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %}

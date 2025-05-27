@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="page-header-title">
+          <h5 class="mb-0 font-medium">Post Details</h5>
+        </div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashboard/user/">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="javascript: void(0)">Posts</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">{{post.title}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 📝 Post Details -->
+    <div class="grid grid-cols-12 gap-x-6 mt-6">
+        <div class="col-span-12 xl:col-span-8 xl:col-start-3">
+          <div class="card rounded-[20px] p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+            
+            <!-- 🖼️ Image -->
+            {% if post.image %}
+            <div class="mb-4">
+              <img src="{{ post.image.url }}" alt="Post Image" class="rounded-[15px] w-full max-h-[400px] object-cover">
+            </div>
+            {% endif %}
+  
+            <!-- 🏷️ Title -->
+            <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">
+              <i class="fas fa-bullhorn text-primary"></i> {{ post.title }}
+            </h2>
+  
+            <!-- 👤 Author + 🗓️ Date -->
+            <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+              <div><i class="fas fa-user text-primary"></i> Author: {{ post.posted_by.username }}</div>
+              <div><i class="fas fa-calendar-alt text-primary"></i> Date: {{ post.created_at|date:"F d, Y" }}</div>
+            </div>
+  
+            <!-- 📜 Content -->
+            <div class="text-muted leading-relaxed mb-4">
+              {{ post.content|linebreaks }}
+            </div>
+  
+            <!-- 🔗 Source Link -->
+            {% if post.source_link %}
+            <div class="mt-4">
+              <a href="{{ post.source_link }}" target="_blank" class="text-blue-600 underline hover:text-blue-800 transition-all">
+                🔗 View Source
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+{% endblock %}
