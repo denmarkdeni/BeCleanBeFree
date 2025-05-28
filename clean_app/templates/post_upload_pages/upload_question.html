@@ -14,52 +14,39 @@
           <div class="card sm:my-12 w-full shadow-none">
 
             <form
-              action="{% url 'upload_quiz' %}"
               method="POST"
               class="card-body !p-10" 
             >
               {% csrf_token %}
 
-              <h2 class="text-center font-medium mb-4">Upload New Quiz</h2>
+              <h2 class="text-center font-medium mb-4">Upload Quiz Question</h2>
 
               <div class="mb-3">
-                <label for="title" class="form-label">Quiz Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="title"
-                  id="title"
-                  required
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="description" class="form-label"
-                  >Quiz Description</label
-                >
-                <textarea
-                  class="form-control"
-                  name="description"
-                  id="description"
-                  rows="4"
-                  required
-                ></textarea>
-              </div>
-
-              <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select
-                  class="form-select"
-                  name="category"
-                  id="category"
-                  required
-                >
-                  <option value="">-- Select Category --</option>
-                  <option value="nutrition">Nutrition</option>
-                  <option value="mental">Mental Health</option>
-                  <option value="physical">Physical Health</option>
-                  <option value="medicine">Medicine</option>
+                <label for="quiz" class="form-label">Select Quiz</label>
+                <select name="quiz" class="form-select" required>
+                  <option value="">-- Select Quiz --</option>
+                  {% for quiz in quizzes %}
+                  <option value="{{ quiz.id }}">{{ quiz.title }} ({{ quiz.get_category_display }})</option>
+                  {% endfor %}
                 </select>
+              </div>
+          
+              <div class="mb-3">
+                <label class="form-label">Question</label>
+                <textarea name="question_text" class="form-control" rows="2" required></textarea>
+              </div>
+          
+              <div class="mb-3">
+                <label class="form-label">Options</label>
+                {% for i in "1234" %}
+                <div class="input-group mb-2">
+                  <input type="text" name="option_text" class="form-control" placeholder="Option {{ forloop.counter }}" required>
+                  <div class="input-group-text">
+                    <input type="radio" name="correct_option" value="{{ forloop.counter0 }}" required>
+                  </div>
+                  <span class="ms-2">Correct?</span>
+                </div>
+                {% endfor %}
               </div>
 
               <button type="submit" class="btn btn-primary">Upload Quiz</button>

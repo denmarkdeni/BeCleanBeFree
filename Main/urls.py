@@ -35,6 +35,7 @@ urlpatterns = [
     path('upload/news/', views.upload_news_post, name='upload_news'),
     path('upload/recovery/', views.upload_recovery_tip, name='upload_recovery'),
     path('upload/quiz/', views.upload_quiz, name='upload_quiz'),
+    path('upload/question/', views.upload_question, name='upload_question'),
 
     path('view/awareness/', views.view_awareness_posts, name='view_awareness_posts'),
     path('view/news/', views.view_news_posts, name='view_news_posts'),

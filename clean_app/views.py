@@ -5,6 +5,7 @@ from .forms import UserRegisterForm, UserLoginForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import AwarenessPost, NewsPost, RecoveryTipPost
+from .models import Quiz, Option, Question, UserQuizResult
 
 def home(request):
     awareness_posts = AwarenessPost.objects.all().order_by('-created_at')[:15]
@@ -157,10 +158,38 @@ def upload_quiz(request):
         description = request.POST['description']
         category = request.POST['category']
 
-        messages.success(request, 'Quiz uploaded successfully!')
+        Quiz.objects.create(
+            title=title,
+            description=description,
+            category=category,
+        )
+
+        messages.success(request, 'Quiz Category uploaded successfully!')
         return redirect('upload_quiz')
 
     return render(request, 'post_upload_pages/upload_quiz.html')
+
+@login_required
+def upload_question(request):
+    quizzes = Quiz.objects.all()
+    if request.method == 'POST':
+        quiz_id = request.POST.get('quiz')
+        question_text = request.POST.get('question_text')
+        options = request.POST.getlist('option_text')
+        correct_option = request.POST.get('correct_option')
+
+        quiz = Quiz.objects.get(id=quiz_id)
+        question = Question.objects.create(quiz=quiz, question_text=question_text)
+
+        for idx, option_text in enumerate(options):
+            is_correct = str(idx) == correct_option
+            Option.objects.create(question=question, option_text=option_text, is_correct=is_correct)
+
+        messages.success(request, 'Quiz Question uploaded successfully!')
+        return redirect('upload_question')
+
+    return render(request, 'post_upload_pages/upload_question.html', {'quizzes': quizzes})
+
 
 def view_awareness_posts(request):
     awareness_posts = AwarenessPost.objects.all().order_by('-created_at')
