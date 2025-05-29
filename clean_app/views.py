@@ -190,6 +190,40 @@ def upload_question(request):
 
     return render(request, 'post_upload_pages/upload_question.html', {'quizzes': quizzes})
 
+@login_required
+def attend_quiz(request):
+    if request.method == 'POST':
+        quiz_id = request.POST.get("quiz_id")
+        quiz = Quiz.objects.get(id=quiz_id)
+
+        if UserQuizResult.objects.filter(user=request.user, quiz=quiz).exists():
+            messages.error(request, 'You have already submitted this quiz.')
+            return redirect('attend_quiz')
+        
+        for question in quiz.questions.all():
+            total_score = 0
+            selected_option_id = request.POST.get(str(question.id))
+            if selected_option_id:
+                selected_option = Option.objects.get(id=selected_option_id)
+                if selected_option.is_correct:
+                    total_score += 1
+
+            UserQuizResult.objects.create(
+                user=request.user,
+                question=question,
+                quiz=quiz,
+                score=total_score
+            )
+        messages.success(request, 'Quiz Question submitted successfully!')
+        return redirect('attend_quiz')  
+
+    quizzes = Quiz.objects.all().prefetch_related('questions__options')
+    return render(request, 'quiz/attend_quiz.html', {'quizzes': quizzes})
+
+@login_required
+def quiz_result(request):
+    results = UserQuizResult.objects.filter(user=request.user).order_by('-completed_at')
+    return render(request, 'quiz/quiz_result.html', {'results': results})
 
 def view_awareness_posts(request):
     awareness_posts = AwarenessPost.objects.all().order_by('-created_at')

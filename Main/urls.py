@@ -37,6 +37,9 @@ urlpatterns = [
     path('upload/quiz/', views.upload_quiz, name='upload_quiz'),
     path('upload/question/', views.upload_question, name='upload_question'),
 
+    path('quiz/attend/', views.attend_quiz, name='attend_quiz'),
+    path('quiz/result/', views.quiz_result, name='quiz_result'),
+
     path('view/awareness/', views.view_awareness_posts, name='view_awareness_posts'),
     path('view/news/', views.view_news_posts, name='view_news_posts'),
     path('view/recovery/', views.view_recovery_tips, name='view_recovery_tips'),

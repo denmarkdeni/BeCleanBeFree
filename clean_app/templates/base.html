@@ -82,20 +82,23 @@
         </li>
         <li class="pc-item pc-hasmenu">
           <a href="{% url 'view_awareness_posts' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="server"></i></span>
-            <span class="pc-mtext">Awareness Section</span>
-          </a>
-        </li>
-        <li class="pc-item pc-hasmenu">
-          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="message-square"></i></span>
             <span class="pc-mtext">Reporting Section</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link"><span class="pc-micon"> <i data-feather="clipboard"></i> </span><span
+              class="pc-mtext">Quiz Section</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="{% url 'attend_quiz' %}"> Quiz Attend</a></li>
+            <li class="pc-item"><a class="pc-link" href="{% url 'quiz_result' %}">Quiz Result</a></li>
+            {% comment %} <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Review Answers</a></li> {% endcomment %}
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
           <a href="{% url 'view_awareness_posts' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="clipboard"></i></span>
-            <span class="pc-mtext">Quiz</span>
+            <span class="pc-micon"> <i data-feather="server"></i></span>
+            <span class="pc-mtext">Awareness Section</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
@@ -239,24 +242,41 @@
         </form>
       </div>
     </li>
+    
     <li>
       {% if messages %}
-        <div id="message-box" class="btn btn-primary">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-      
-        <script>
-          setTimeout(function () {
-            const messageBox = document.getElementById('message-box');
-            if (messageBox) {
-              messageBox.style.display = 'none';
-            }
-          }, 2000);  
-        </script>
+        {% for message in messages %}
+          <div
+            id="message-box-{{ forloop.counter }}"
+            class="px-4 py-2 mb-2 rounded text-white
+              {% if message.tags == 'success' %}
+                bg-green-500
+              {% elif message.tags == 'error' %}
+                bg-red-500
+              {% elif message.tags == 'warning' %}
+                bg-yellow-500 text-black
+              {% elif message.tags == 'info' %}
+                bg-blue-500
+              {% else %}
+                bg-gray-500
+              {% endif %}
+            "
+          >
+            {{ message }}
+          </div>
+    
+          <script>
+            setTimeout(function () {
+              const messageBox = document.getElementById('message-box-{{ forloop.counter }}');
+              if (messageBox) {
+                messageBox.style.display = 'none';
+              }
+            }, 2000);
+          </script>
+        {% endfor %}
       {% endif %}
-    </li>
+    </li>    
+
   </ul>
 </div>
 <!-- [Mobile Media Block end] -->
