@@ -1,3 +1,71 @@
-<h1>
-    Result for Quiz: {{ quiz.title }} ({{ quiz.id }})
-</h1>
+{% extends "base.html" %} {% block content %} 
+
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="grid grid-cols-12 gap-x-6">
+      <div class="col-span-12 xl:col-span-12 md:col-span-12">
+        <div class="card table-card">
+          <div class="card-header">
+            <h5 class="text-center">Quiz Results</h5>
+            <h4 class="text-right"> <b>Total Points</b> : {{ total_score }} 💰<h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th class="w-1/12">#</th>
+                    <th class="w-6/12">Quiz Title</th>
+                    <th class="w-2/12">Completed At</th>
+                    <th class="w-3/12">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for result in quiz_scores %}
+                  <tr class="unread">
+                    <td>
+                      <h2 class="text-muted">
+                        {{ forloop.counter }}.
+                      <h2>
+                    </td>
+                    <td>
+                      <h6 class="mb-1">{{ result.quiz_title }}</h6>
+                      <p class="m-0">{{ result.question_text }}</p>
+                    </td>
+                    <td>
+                      <h6 class="text-muted">
+                        ⏱ {{ result.completed_at | date:"M d H:i" }}
+                      </h6>
+                    </td>
+                    <td>
+                        <h6 class="text-muted">
+                            {% if result.score == 0 %}
+                            <i
+                            class="fas fa-circle text-failure text-[10px] ltr:mr-4 rtl:ml-4"
+                          ></i>
+                          {{ result.score }}
+                            {% else %}
+                            <i
+                            class="fas fa-circle text-success text-[10px] ltr:mr-4 rtl:ml-4"
+                          ></i>
+                          {{ result.score }} 💰
+                            {% endif %}
+                        </h6>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" class="text-center text-muted">No quiz results yet.</td>
+                  </tr>                  
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

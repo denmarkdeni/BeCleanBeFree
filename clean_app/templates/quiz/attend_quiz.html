@@ -19,7 +19,7 @@
             class="absolute left-[-100px] bottom-[-100px] w-[300px] h-[300px] block rounded-full bg-theme-bg-2 animate-[floating_9s_infinite]"
           ></span>
         </div>
-
+        {% if quizzes %}
         <h2 class="text-center font-medium mb-4">Attend Quiz</h2>
 
         {% for quiz in quizzes %}
@@ -66,6 +66,18 @@
           </form>
         </div>
         {% endfor %}
+
+        {% else %}
+
+        <div class="card sm:my-12 w-full shadow-none">
+          <div class="card-body !p-10">
+            <h2 class="text-center font-medium mb-4">No Quizzes Available</h2>
+            <p class="text-center text-muted">
+              There are currently no quizzes available for you to attend.
+            </p>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -109,3 +109,21 @@ class UserQuizResult(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.quiz.title} - {self.score}"
+    
+class Report(models.Model):
+    CATEGORY_CHOICES = [
+        ('drug', 'Drug Abuse'),
+        ('crime', 'Crime'),
+        ('other', 'Other'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # Allow anonymous
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='reports/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_resolved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

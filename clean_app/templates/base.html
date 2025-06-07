@@ -81,7 +81,7 @@
           <i data-feather="feather"></i>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
+          <a href="{% url 'upload_report' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="message-square"></i></span>
             <span class="pc-mtext">Reporting Section</span>
           </a>
@@ -165,7 +165,7 @@
             <ul class="pc-submenu">
               <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Upload Quiz Category</a></li>
               <li class="pc-item"><a class="pc-link" href="{% url 'upload_question' %}">Upload Question</a></li>
-              <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Review Answers</a></li>
+              <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Review Quiz/Answers</a></li>
             </ul>
           </li>
           <li class="pc-item pc-hasmenu">
@@ -464,10 +464,10 @@
                 <svg class="pc-icon text-muted me-2 inline-block">
                   <use xlink:href="#custom-setting-outline"></use>
                 </svg>
-                <span>Settings</span>
+                <span>{{ request.user.profile.role|default:"Anonymous User" }}</span>
               </span>
             </a>
-            <a href="#" class="dropdown-item">
+            {% comment %} <a href="#" class="dropdown-item">
               <span>
                 <svg class="pc-icon text-muted me-2 inline-block">
                   <use xlink:href="#custom-share-bold"></use>
@@ -482,7 +482,7 @@
                 </svg>
                 <span>Change Password</span>
               </span>
-            </a>
+            </a> {% endcomment %}
             <a href="/logout">
                 <div class="grid my-3">
                     <button class="btn btn-primary flex items-center justify-center">

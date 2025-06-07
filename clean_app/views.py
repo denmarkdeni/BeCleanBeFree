@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import UserRegisterForm, UserLoginForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import AwarenessPost, NewsPost, RecoveryTipPost
+from .models import AwarenessPost, NewsPost, RecoveryTipPost, Report
 from .models import Quiz, Option, Question, UserQuizResult
 
 def home(request):
@@ -77,7 +77,27 @@ def user_logout(request):
     return redirect('register')
 
 def user_dashboard(request):
-    return render(request, 'user_dashboard.html')
+    results = UserQuizResult.objects.filter(user=request.user)
+    quiz_marks = sum(result.score for result in results)
+    score_percentage = (quiz_marks / results.count()) * 100 if results.count() > 0 else 0
+    total_cases = Report.objects.filter(user=request.user).count()
+    resolved_cases = Report.objects.filter(user=request.user, is_resolved=True).count()
+    unresolved_cases = Report.objects.filter(user=request.user, is_resolved=False).count()
+    awareness_posts = AwarenessPost.objects.all().order_by('-created_at')[:2]
+    news_posts = NewsPost.objects.all().order_by('-created_at')[:2]
+    recovery_tips = RecoveryTipPost.objects.all().order_by('-created_at')[:2]
+    context = {
+        'quiz_marks': quiz_marks,
+        'score_percentage': score_percentage,
+        'total_quizzes' : results.count(),
+        'total_cases': total_cases,
+        'resolved_cases': resolved_cases,
+        'unresolved_cases': unresolved_cases,
+        'awareness_posts': awareness_posts,
+        'news_posts': news_posts,
+        'recovery_tips': recovery_tips,
+    }
+    return render(request, 'user_dashboard.html', context)
 
 def counselor_dashboard(request):
     return render(request, 'counselor_dashboard.html')
@@ -200,24 +220,30 @@ def attend_quiz(request):
             messages.error(request, 'You have already submitted this quiz.')
             return redirect('attend_quiz')
         
+
         for question in quiz.questions.all():
-            total_score = 0
+            total_score = 0 
             selected_option_id = request.POST.get(str(question.id))
             if selected_option_id:
                 selected_option = Option.objects.get(id=selected_option_id)
                 if selected_option.is_correct:
                     total_score += 1
 
+            # Save each question result
             UserQuizResult.objects.create(
                 user=request.user,
                 question=question,
                 quiz=quiz,
-                score=total_score
+                score=total_score  # Optional: you can store per-question score if needed
             )
-        messages.success(request, 'Quiz Question submitted successfully!')
+
+        messages.success(request, 'Quiz submitted successfully!')
         return redirect('attend_quiz')  
 
-    quizzes = Quiz.objects.all().prefetch_related('questions__options')
+    # ✅ Get all quizzes the user has NOT attempted
+    attended_quiz_ids = UserQuizResult.objects.filter(user=request.user).values_list('quiz_id', flat=True).distinct()
+    quizzes = Quiz.objects.exclude(id__in=attended_quiz_ids).prefetch_related('questions__options')
+
     return render(request, 'quiz/attend_quiz.html', {'quizzes': quizzes})
 
 @login_required
@@ -249,3 +275,44 @@ def view_post_details(request, model_type, post_id):
         return redirect('user_dashboard')
     return render(request, 'view_pages/view_post_details.html', {'post': post})
 
+def quiz_result(request):
+    user = request.user
+    results = UserQuizResult.objects.filter(user=user).order_by('-completed_at')
+    Total_score = sum(result.score for result in results)
+
+    quiz_scores = []
+    for result in results:
+        
+        quiz_scores.append({
+            'quiz_title': result.quiz.title,
+            'question_text': result.question.question_text,
+            'score': result.score,
+            'completed_at': result.completed_at
+        })
+
+    context = {
+        'quiz_scores': quiz_scores,
+        'total_score': Total_score,
+    }
+    
+    return render(request, 'quiz/quiz_result.html', context)
+
+def upload_report(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+
+        Report.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            title=title,
+            category=category,
+            description=description,
+            image=image
+        )
+
+        messages.success(request, "Your report has been submitted successfully.")
+        return redirect('upload_report')  
+    
+    return render(request, 'report/upload_report.html')

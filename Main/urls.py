@@ -37,6 +37,8 @@ urlpatterns = [
     path('upload/quiz/', views.upload_quiz, name='upload_quiz'),
     path('upload/question/', views.upload_question, name='upload_question'),
 
+    path('upload/report/', views.upload_report, name='upload_report'),
+
     path('quiz/attend/', views.attend_quiz, name='attend_quiz'),
     path('quiz/result/', views.quiz_result, name='quiz_result'),
 

@@ -46,9 +46,11 @@
             <div class="row gx-0 align-items-center" style="height: 45px;">
                 <div class="col-lg-8 text-center text-lg-start mb-lg-0">
                     <div class="d-flex flex-wrap">
-                        <a href="#" class="text-light me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>SH Street,Trivandrum,Kerala</a>
-                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>+91 6785424567</a>
-                        <a href="#" class="text-light me-0"><i class="fas fa-envelope text-primary me-2"></i>Becleanbefree@gmail.com</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Trivandrum,Kerala</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Helpline1 : +91 9870984567</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Helpline2 : +91 8790654670</a>
+                        <a href="#" class="text-light me-4"><i class="fas fa-phone-alt text-primary me-2"></i>Helpline3 : 1800-11-0031</a>
+                        {% comment %} <a href="#" class="text-light me-0"><i class="fas fa-envelope text-primary me-2"></i>Becleanbefree@gmail.com</a> {% endcomment %}
                     </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
@@ -106,7 +108,8 @@
                         </div>
                         <a href="#contact-id" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <a href="/register" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Register Now</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Register </a>
+                    <a href="{% url 'upload_report' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Report </a>
                 </div>
             </nav>
         </div>
@@ -167,8 +170,8 @@
         <div class="container-fluid bg-secondary wow zoomInDown" data-wow-delay="0.1s">
             <div class="container">
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center text-center p-5">
-                    <h1 class="me-4"><span class="fw-normal">Join us today </span><span></span></h1>
-                    <a href="#" class="text-white fw-bold fs-2"> <i class="fa fa-phone me-1"></i> +91 6785424567</a>
+                    <h1 class="me-4"><span class="fw-normal">Drug Abuse | Anti Drug Helpline </span><span></span></h1>
+                    <a href="#" class="text-white fw-bold fs-2"> <i class="fa fa-phone me-1"></i> 1800-11-0031</a>
                 </div>
             </div>
         </div>

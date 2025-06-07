@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<div class="auth-main relative">
+    <div class="auth-wrapper v1 flex items-center w-full h-full min-h-screen">
+      <div class="auth-form flex items-center justify-center grow flex-col min-h-screen relative p-6 ">
+        <div class="w-full max-w-[700px] ml-200 relative">
+          <div class="auth-bg ">
+            <span class="absolute top-[-100px] right-[200px] w-[300px] h-[300px] block rounded-full bg-primary-500 animate-[floating_7s_infinite]"></span>
+            <span class="absolute top-[350px] right-[-100px] w-[300px] h-[300px] block rounded-full bg-theme-bg-1 animate-[floating_7s_infinite]"></span>
+            <span class="absolute top-[150px] right-[-150px] w-5 h-5 block rounded-full bg-primary-500 animate-[floating_9s_infinite]"></span>
+            <span class="absolute left-[-150px] bottom-[150px] w-5 h-5 block rounded-full bg-theme-bg-1 animate-[floating_7s_infinite]"></span>
+            <span class="absolute left-[-100px] bottom-[-100px] w-[300px] h-[300px] block rounded-full bg-theme-bg-2 animate-[floating_9s_infinite]"></span>
+          </div>
+          <div class="card sm:my-12  w-full shadow-none">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'upload_report' %}" class="card-body !p-10">
+                {% csrf_token %}
+              
+                <div class="mb-4">
+                  <input type="text" name="title" class="form-control" placeholder="Title" required>
+                </div>
+              
+                <div class="mb-4">
+                  <select name="category" class="form-select" required>
+                    <option value="" hidden>Select Option</option>
+                    <option value="drug">Drug Abuse</option>
+                    <option value="crime">Crime</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              
+                <div class="mb-4">
+                  <textarea name="description" class="form-control" rows="5" placeholder="Description" required></textarea>
+                </div>
+              
+                <div class="mb-4">
+                  <input type="file" name="image" class="form-control">
+                </div>
+
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </div>
+            </form>              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
