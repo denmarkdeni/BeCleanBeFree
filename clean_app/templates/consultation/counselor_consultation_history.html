@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="col-span-12 xl:col-span-12 md:col-span-12">
+      <div class="card table-card">
+        <div class="card-header">
+          <h5>Consultation History</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Feedback</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for consultation in consultations %}
+                <tr class="unread">
+                  <td>
+                    <h6 class="mb-1">{{ consultation.request.user.username }}</h6>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ consultation.date|date:"d M Y H:i" }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ consultation.request.get_consultation_type_display }}</p>
+                  </td>
+                  <td>
+                    {% if consultation.feedback %}
+                    <p class="m-0">Rating: {{ consultation.rating }}/5<br>{{ consultation.feedback|truncatewords:10 }}</p>
+                    {% else %}
+                    <p class="m-0">No feedback</p>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <a href="{% url 'consultation_details' consultation.request.id %}" class="badge bg-theme-bg-1 text-white text-[12px] mx-2">Details</a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5">No consultations found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

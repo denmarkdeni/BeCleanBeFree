@@ -122,25 +122,25 @@
             <div class="flex items-center justify-center">
               <div class="shrink-0">
                 <!-- <i class="fab fa-twitter text-primary-500 text-[36px]"></i> -->
-                 <h3>Awareness</h3> 
+                 <h3>Consultation</h3> 
                   <h3>Insight</h3>
               </div>
               <div class="grow ltr:text-right rtl:text-left">
-                <h3 class="text-green-500 mb-0">115m</h3>
-                <h5 class="text-green-500 mb-0"><span class="text-muted">Screen-time</span></h5>
+                <h3 class="text-green-500 mb-0">{{ consultations }}</h3>
+                <h5 class="text-green-500 mb-0"><span class="text-muted">Total Meetings</span></h5>
               </div>
             </div>
           </div>
           <div class="card-body">
             <div class="grid grid-cols-12 gap-x-6">
               <div class="col-span-6">
-                <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Balance:</span>185m</h6>
+                <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending :</span>{{ consultations_pending }}</h6>
                 <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                   <div class="bg-success-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 38%"></div>
                 </div>
               </div>
               <div class="col-span-6">
-                <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Average Time:</span>20m</h6>
+                <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Completed :</span>{{ consultations_completed }}</h6>
                 <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                   <div class="bg-primary-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 40%"></div>
                 </div>

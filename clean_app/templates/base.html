@@ -62,7 +62,7 @@
     <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">
       <ul class="pc-navbar">
         <li class="pc-item pc-caption">
-          <label>Navigation</label>
+          <label>Home</label>
         </li>
         <li class="pc-item">
 
@@ -76,8 +76,16 @@
             <span class="pc-mtext">Dashboard</span>
           </a>
         </li>
+        <li class="pc-item">
+          <a href="{% url 'user_profile' %}" class="pc-link">
+            <span class="pc-micon">
+              <i data-feather="user"></i>
+            </span>
+            <span class="pc-mtext">Profile</span>
+          </a>
+        </li>
         <li class="pc-item pc-caption">
-          <label>Menu levels</label>
+          <label>Actions</label>
           <i data-feather="feather"></i>
         </li>
         <li class="pc-item pc-hasmenu">
@@ -114,10 +122,12 @@
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a href="{% url 'view_awareness_posts' %}" class="pc-link">
-            <span class="pc-micon"> <i data-feather="users"></i></span>
-            <span class="pc-mtext">Consultation</span>
-          </a>
+          <a href="#!" class="pc-link"><span class="pc-micon"> <i data-feather="users"></i> </span><span
+              class="pc-mtext">Consultation</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="{% url 'counselors_list' %}"> Counselors</a></li>
+            <li class="pc-item"><a class="pc-link" href="{% url 'user_consultation_history' %}">History</a></li>
+          </ul>
         </li>
 
     {% elif request.user.profile.role == 'counselor' %}
@@ -128,6 +138,14 @@
                 <i data-feather="home"></i>
               </span>
               <span class="pc-mtext">Dashboard</span>
+            </a>
+          </li>
+          <li class="pc-item">
+            <a href="{% url 'counselor_profile' %}" class="pc-link">
+              <span class="pc-micon">
+                <i data-feather="user"></i>
+              </span>
+              <span class="pc-mtext">Profile</span>
             </a>
           </li>
           <li class="pc-item pc-caption">
@@ -169,10 +187,12 @@
             </ul>
           </li>
           <li class="pc-item pc-hasmenu">
-            <a href="{% url 'upload_awareness' %}" class="pc-link">
-              <span class="pc-micon"> <i data-feather="users"></i></span>
-              <span class="pc-mtext">Consultation</span>
-            </a>
+            <a href="#!" class="pc-link"><span class="pc-micon"> <i data-feather="users"></i> </span><span
+                class="pc-mtext">Consultation</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+            <ul class="pc-submenu">
+              <li class="pc-item"><a class="pc-link" href="{% url 'counselor_appointments' %}"> Appointments</a></li>
+              <li class="pc-item"><a class="pc-link" href="{% url 'counselor_consultation_history' %}">History</a></li>
+            </ul>
           </li>
 
     {% elif request.user.is_superuser %}
@@ -190,21 +210,27 @@
             <i data-feather="feather"></i>
         </li>
         <li class="pc-item pc-hasmenu">
-            <a href="../elements/bc_color.html" class="pc-link">
-            <span class="pc-micon"> <i data-feather="server"></i></span>
+            <a href="{% url 'user_management' %}" class="pc-link">
+            <span class="pc-micon"> <i data-feather="users"></i></span>
             <span class="pc-mtext">User Management</span>
             </a>
         </li>
         <li class="pc-item pc-hasmenu">
-            <a href="../elements/bc_typography.html" class="pc-link">
+            <a href="{% url 'post_management' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="message-square"></i></span>
             <span class="pc-mtext">Post Management</span>
             </a>
         </li>
         <li class="pc-item pc-hasmenu">
-            <a href="../elements/icon-feather.html" class="pc-link">
+            <a href="{% url 'report_management' %}" class="pc-link">
             <span class="pc-micon"> <i data-feather="clipboard"></i></span>
             <span class="pc-mtext">Reports Management</span>
+            </a>
+        </li>
+        <li class="pc-item pc-hasmenu">
+            <a href="{% url 'consultations_list' %}" class="pc-link">
+            <span class="pc-micon"> <i data-feather="database"></i></span>
+            <span class="pc-mtext">Consultations List</span>
             </a>
         </li>
 
@@ -250,15 +276,15 @@
             id="message-box-{{ forloop.counter }}"
             class="px-4 py-2 mb-2 rounded text-white
               {% if message.tags == 'success' %}
-                bg-green-500
+                bg-green-900
               {% elif message.tags == 'error' %}
-                bg-red-500
+                bg-red-900
               {% elif message.tags == 'warning' %}
-                bg-yellow-500 text-black
+                bg-yellow-900 text-black
               {% elif message.tags == 'info' %}
-                bg-blue-500
+                bg-blue-900
               {% else %}
-                bg-gray-500
+                bg-gray-900
               {% endif %}
             "
           >
@@ -330,7 +356,7 @@
         </a>
       </div>
     </li>
-    <li class="dropdown pc-h-item">
+    {% comment %} <li class="dropdown pc-h-item">
       <a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
         aria-haspopup="false" aria-expanded="false">
         <i data-feather="bell"></i>
@@ -439,11 +465,12 @@
           </a>
         </div>
       </div>
-    </li>
+    </li> {% endcomment %}
     <li class="dropdown pc-h-item header-user-profile">
       <a class="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
         aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
-        <i data-feather="user"></i>
+        {% comment %} <i data-feather="user"></i> {% endcomment %}
+         <img src="{{ user.profile.profile_pic.url }}" alt="Profile Picture" class="mt-2 rounded-full" style="width: 30px; margin-bottom :15px;">
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2 overflow-hidden">
         <div class="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500">

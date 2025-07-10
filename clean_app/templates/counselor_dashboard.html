@@ -24,13 +24,13 @@
         <div class="col-span-12 xl:col-span-4 md:col-span-6">
           <div class="card">
             <div class="card-header !pb-0 !border-b-0">
-              <h5>Total User Interaction</h5>
+              <h5>Total Posts</h5>
             </div>
             <div class="card-body">
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <h3 class="font-light flex items-center mb-0">
-                  <i class="feather icon-users text-blue-500 text-[30px] mr-1.5"></i>
-                  125
+                  <i class="feather icon-mail text-blue-500 text-[30px] mr-1.5"></i>
+                  {{ total_posts }}
                 </h3>
                 <!-- <p class="mb-0">67%</p> -->
               </div>
@@ -44,13 +44,13 @@
         <div class="col-span-12 xl:col-span-4 md:col-span-6">
           <div class="card">
             <div class="card-header !pb-0 !border-b-0">
-              <h5>Flagged Users</h5>
+              <h5>Total Quiz</h5>
             </div>
             <div class="card-body">
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <h3 class="font-light flex items-center mb-0">
                   <i class="feather icon-bookmark text-danger-500 text-[30px] mr-1.5"></i>
-                  13
+                  {{ total_quizzes }}
                 </h3>
                 <!-- <p class="mb-0">36%</p> -->
               <!-- </div> -->
@@ -64,14 +64,14 @@
         <div class="col-span-12 xl:col-span-4">
           <div class="card">
             <div class="card-header !pb-0 !border-b-0">
-              <h5>Feedback Given
+              <h5>Total Consultation
               </h5>
             </div>
             <div class="card-body">
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <h3 class="font-light flex items-center mb-0">
-                  <i class="feather icon-mail text-success-500 text-[30px] mr-1.5"></i>
-                  32
+                  <i class="feather icon-users text-success-500 text-[30px] mr-1.5"></i>
+                  {{ total_consultations }}
                 </h3>
                 <!-- <p class="mb-0">80%</p> -->
               <!-- </div>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="grow ltr:text-right rtl:text-left">
                   <!-- <h3 class="mb-2">20</h3> -->
-                  <h3 class="text-success-500 mb-0">57</h3>
+                  <h3 class="text-success-500 mb-0">{{ total_posts }}</h3>
                     <h5><span class="text-muted">Total-Resources</span></h5>
                 </div>
               </div>
@@ -101,13 +101,13 @@
             <div class="card-body">
               <div class="grid grid-cols-12 gap-x-6">
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Viewed:</span>80</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending :</span>{{ pending_posts }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 80%"></div>
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending:</span>45</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Approved :</span>{{ approved_posts }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-theme-bg-2 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 75%"></div>
                   </div>
@@ -126,7 +126,7 @@
                     <h3>Questions</h3>
                 </div>
                 <div class="grow ltr:text-right rtl:text-left">
-                  <h3 class="text-green-500 mb-0">56</h3>
+                  <h3 class="text-green-500 mb-0">{{ total_quizzes }}</h3>
                   <h5 class="text-green-500 mb-0"><span class="text-muted">Total-Questions</span></h5>
                 </div>
               </div>
@@ -134,13 +134,13 @@
             <div class="card-body">
               <div class="grid grid-cols-12 gap-x-6">
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Responded:</span>40</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Responded:</span>{{ total_posts }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-success-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 68%"></div>
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending:</span>16</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending:</span>{{ total_posts }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-primary-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 30%"></div>
                   </div>
@@ -155,25 +155,25 @@
               <div class="flex items-center justify-center">
                 <div class="shrink-0">
                   <!-- <i class="fab fa-twitter text-primary-500 text-[36px]"></i> -->
-                   <h3>Quiz</h3> 
-                    <h3>Results</h3>
+                   <h3>Consultations</h3> 
+                    <h3>Insights</h3>
                 </div>
                 <div class="grow ltr:text-right rtl:text-left">
-                  <h3 class="text-green-500 mb-0">12</h3>
-                  <h5 class="text-green-500 mb-0"><span class="text-muted">Total-Recevied</span></h5>
+                  <h3 class="text-green-500 mb-0">{{ total_consultations }}</h3>
+                  <h5 class="text-green-500 mb-0"><span class="text-muted">Total Consultation</span></h5>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <div class="grid grid-cols-12 gap-x-6">
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Responded:</span>7</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Feedbacks :</span>{{ feedbacks_taken }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-success-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 68%"></div>
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Pending:</span>5</h6>
+                  <h6 class="text-center mb-2.5"><span class="text-muted m-r-5">Completed :</span>{{ completed_consultations }}</h6>
                   <div class="w-full bg-theme-bodybg rounded-lg h-1.5 dark:bg-themedark-bodybg">
                     <div class="bg-primary-500 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]" role="progressbar" style="width: 30%"></div>
                   </div>
@@ -182,204 +182,52 @@
             </div>
           </div>
         </div> 
-        <!-- <div class="col-span-12 xl:col-span-4 md:col-span-6">
-          <div class="card user-list">
-            <div class="card-header">
-              <h5>Rating</h5>
-            </div>
-            <div class="card-body">
-              <div class="flex items-center justify-between gap-1 mb-5">
-                <h2 class="font-light flex items-center m-0">
-                  4.7
-                  <i class="fas fa-star text-[10px] ml-2.5 text-warning-500"></i>
-                </h2>
-                <h6 class="flex items-center m-0">
-                  0.4
-                  <i class="fas fa-caret-up text-success text-[22px] ml-2.5"></i>
-                </h6>
-              </div>
-
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <h6 class="flex items-center gap-1">
-                  <i class="fas fa-star text-[10px] mr-2.5 text-warning-500"></i>
-                  5
-                </h6>
-                <h6>384</h6>
-              </div>
-              <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mb-6 mt-3 dark:bg-themedark-bodybg">
-                <div
-                  class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]"
-                  role="progressbar"
-                  style="width: 70%"
-                ></div>
-              </div>
-
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <h6 class="flex items-center gap-1">
-                  <i class="fas fa-star text-[10px] mr-2.5 text-warning-500"></i>
-                  4
-                </h6>
-                <h6>145</h6>
-              </div>
-              <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mb-6 mt-3 dark:bg-themedark-bodybg">
-                <div
-                  class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]"
-                  role="progressbar"
-                  style="width: 35%"
-                ></div>
-              </div>
-
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <h6 class="flex items-center gap-1">
-                  <i class="fas fa-star text-[10px] mr-2.5 text-warning-500"></i>
-                  3
-                </h6>
-                <h6>24</h6>
-              </div>
-              <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mb-6 mt-3 dark:bg-themedark-bodybg">
-                <div
-                  class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]"
-                  role="progressbar"
-                  style="width: 25%"
-                ></div>
-              </div>
-
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <h6 class="flex items-center gap-1">
-                  <i class="fas fa-star text-[10px] mr-2.5 text-warning-500"></i>
-                  2
-                </h6>
-                <h6>1</h6>
-              </div>
-              <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mb-6 mt-3 dark:bg-themedark-bodybg">
-                <div
-                  class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]"
-                  role="progressbar"
-                  style="width: 10%"
-                ></div>
-              </div>
-
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <h6 class="flex items-center gap-1">
-                  <i class="fas fa-star text-[10px] mr-2.5 text-warning-500"></i>
-                  1
-                </h6>
-                <h6>0</h6>
-              </div>
-              <div class="w-full bg-theme-bodybg rounded-lg h-1.5 mt-4 dark:bg-themedark-bodybg">
-                <div
-                  class="bg-theme-bg-1 h-full rounded-lg shadow-[0_10px_20px_0_rgba(0,0,0,0.3)]"
-                  role="progressbar"
-                  style="width: 0%"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        
         <div class="col-span-12 xl:col-span-12 md:col-span-12">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Recent Articles</h5>
+              <h5>Consultation History</h5>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Feedback</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
                   <tbody>
+                    {% for consultation in consultations %}
                     <tr class="unread">
                       <td>
-                        <img class="rounded-full max-w-10" style="width: 40px" src="../assets/images/user/avatar-1.jpg" alt="activity-user" />
+                        <h6 class="mb-1">{{ consultation.request.user.username }}</h6>
                       </td>
                       <td>
-                        <h6 class="mb-1">Isabella Christensen</h6>
-                        <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
+                        <p class="m-0">{{ consultation.date|date:"d M Y H:i" }}</p>
                       </td>
                       <td>
-                        <h6 class="text-muted">
-                          <i class="fas fa-circle text-success text-[10px] ltr:mr-4 rtl:ml-4"></i>
-                          11 MAY 12:56
-                        </h6>
+                        <p class="m-0">{{ consultation.request.get_consultation_type_display }}</p>
                       </td>
                       <td>
-                        <a href="#!" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Edit</a>
-                        <a href="#!" class="badge bg-theme-bg-1 text-white text-[12px]">Remove</a>
+                        {% if consultation.feedback %}
+                        <p class="m-0">Rating: {{ consultation.rating }}/5<br>{{ consultation.feedback|truncatewords:10 }}</p>
+                        {% else %}
+                        <p class="m-0">No feedback</p>
+                        {% endif %}
+                      </td>
+                      <td>
+                        <a href="{% url 'counselor_consultation_history' %}" class="badge bg-theme-bg-1 text-white text-[12px] mx-2">Details</a>
                       </td>
                     </tr>
-                    <tr class="unread">
-                      <td>
-                        <img class="rounded-full max-w-10" style="width: 40px" src="../assets/images/user/avatar-2.jpg" alt="activity-user" />
-                      </td>
-                      <td>
-                        <h6 class="mb-1">Mathilde Andersen</h6>
-                        <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
-                      </td>
-                      <td>
-                        <h6 class="text-muted">
-                          <i class="fas fa-circle text-danger text-[10px] ltr:mr-4 rtl:ml-4"></i>
-                          11 MAY 10:35
-                        </h6>
-                      </td>
-                      <td>
-                        <a href="#!" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Edit</a>
-                        <a href="#!" class="badge bg-theme-bg-1 text-white text-[12px]">Remove</a>
-                      </td>
+                    {% empty %}
+                    <tr>
+                      <td colspan="5">No consultations found.</td>
                     </tr>
-                    <tr class="unread">
-                      <td>
-                        <img class="rounded-full max-w-10" style="width: 40px" src="../assets/images/user/avatar-3.jpg" alt="activity-user" />
-                      </td>
-                      <td>
-                        <h6 class="mb-1">Karla Sorensen</h6>
-                        <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
-                      </td>
-                      <td>
-                        <h6 class="text-muted">
-                          <i class="fas fa-circle text-success text-[10px] ltr:mr-4 rtl:ml-4"></i>
-                          9 MAY 17:38
-                        </h6>
-                      </td>
-                      <td>
-                        <a href="#!" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Edit</a>
-                        <a href="#!" class="badge bg-theme-bg-1 text-white text-[12px]">Remove</a>
-                      </td>
-                    </tr>
-                    <tr class="unread">
-                      <td>
-                        <img class="rounded-full max-w-10" style="width: 40px" src="../assets/images/user/avatar-1.jpg" alt="activity-user" />
-                      </td>
-                      <td>
-                        <h6 class="mb-1">Ida Jorgensen</h6>
-                        <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
-                      </td>
-                      <td>
-                        <h6 class="text-muted f-w-300">
-                          <i class="fas fa-circle text-danger text-[10px] ltr:mr-4 rtl:ml-4"></i>
-                          19 MAY 12:56
-                        </h6>
-                      </td>
-                      <td>
-                        <a href="#!" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Edit</a>
-                        <a href="#!" class="badge bg-theme-bg-1 text-white text-[12px]">Remove</a>
-                      </td>
-                    </tr>
-                    <tr class="unread">
-                      <td>
-                        <img class="rounded-full max-w-10" style="width: 40px" src="../assets/images/user/avatar-2.jpg" alt="activity-user" />
-                      </td>
-                      <td>
-                        <h6 class="mb-1">Albert Andersen</h6>
-                        <p class="m-0">Lorem Ipsum is simply dummy text of…</p>
-                      </td>
-                      <td>
-                        <h6 class="text-muted">
-                          <i class="fas fa-circle text-success text-[10px] ltr:mr-4 rtl:ml-4"></i>
-                          21 July 12:56
-                        </h6>
-                      </td>
-                      <td>
-                        <a href="#!" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Edit</a>
-                        <a href="#!" class="badge bg-theme-bg-1 text-white text-[12px]">Remove</a>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

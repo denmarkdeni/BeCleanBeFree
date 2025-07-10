@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="col-span-12 xl:col-span-12 md:col-span-12">
+      <div class="card table-card">
+        <div class="card-header">
+          <h5>Consultation History</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Counselor</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Feedback</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for consultation in consultations %}
+                <tr class="unread">
+                  <td>
+                    <h6 class="mb-1">{{ consultation.request.counselor.user.username }}</h6>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ consultation.date|date:"d M Y H:i" }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ consultation.request.get_consultation_type_display }}</p>
+                  </td>
+                  <td>
+                    <h6 class="text-muted">
+                      <i class="fas fa-circle {% if consultation.request.status == 'completed' %}text-success{% else %}text-danger{% endif %} text-[10px] ltr:mr-4 rtl:ml-4"></i>
+                      {{ consultation.request.get_status_display }}
+                    </h6>
+                  </td>
+                  <td>
+                    {% if consultation.request.status == 'completed' and not consultation.feedback %}
+                    <a href="{% url 'submit_feedback' consultation.id %}" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Add Feedback</a>
+                    {% elif consultation.feedback %}
+                    <p class="m-0">Rating: {{ consultation.rating }}/5<br>{{ consultation.feedback|truncatewords:10 }}</p>
+                    {% else %}
+                    <p class="m-0">No feedback yet</p>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5">No consultations found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

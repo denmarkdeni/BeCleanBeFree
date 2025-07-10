@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-main relative">
+  <div class="auth-wrapper v1 flex items-center w-full h-full min-h-screen">
+    <div class="auth-form flex items-center justify-center grow flex-col min-h-screen relative p-6">
+      <div class="w-full max-w-[700px] ml-200 relative">
+        <div class="auth-bg">
+          <span class="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] block rounded-full bg-theme-bg-1 animate-[floating_7s_infinite]"></span>
+          <span class="absolute top-[150px] right-[-150px] w-5 h-5 block rounded-full bg-primary-500 animate-[floating_9s_infinite]"></span>
+          <span class="absolute left-[-150px] bottom-[150px] w-5 h-5 block rounded-full bg-theme-bg-1 animate-[floating_7s_infinite]"></span>
+          <span class="absolute left-[-100px] bottom-[-100px] w-[300px] h-[300px] block rounded-full bg-theme-bg-2 animate-[floating_9s_infinite]"></span>
+        </div>
+        <div class="card sm:my-12 w-full shadow-none">
+          <form class="card-body !p-10" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h4 class="text-center font-medium mb-4">User Profile</h4>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" name="username" value="{{ user.username }}" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Bio</label>
+              <textarea name="bio" placeholder="Tell us about yourself" class="form-control">{{ profile.bio|default_if_none:"" }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" name="phone" placeholder="Phone number" value="{{ profile.phone|default_if_none:"" }}" class="form-control">
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Profile Picture</label>
+              <input type="file" name="profile_pic" class="form-control">
+              {% if profile.profile_pic %}
+              <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="mt-2 rounded-full" style="width: 60px;">
+              {% endif %}
+            </div>
+            <div class="mt-4 text-center">
+              <button type="submit" class="btn btn-primary mx-auto shadow-2xl">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

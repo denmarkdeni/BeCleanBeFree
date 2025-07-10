@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="col-span-12 xl:col-span-12 md:col-span-12">
+      <div class="card table-card">
+        <div class="card-header">
+          <h5>Available Counselors</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Profile</th>
+                  <th>Name</th>
+                  <th>Specialization</th>
+                  <th>Availability</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for counselor in counselors %}
+                <tr class="unread">
+                  <td>
+                    <img class="rounded-full max-w-10" style="width: 40px" src="{{ counselor.profile_pic.url }}" alt="{{ counselor.user.username }}">
+                  </td>
+                  <td>
+                    <h6 class="mb-1">{{ counselor.user.username }}</h6>
+                    <p class="m-0">{{ counselor.bio|truncatewords:10 }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ counselor.specialization|default:"Not specified" }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ counselor.availability|default:"Not specified" }}</p>
+                  </td>
+                  <td>
+                    <a href="{% url 'request_consultation' counselor.id %}" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Request Consultation</a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5">No counselors found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

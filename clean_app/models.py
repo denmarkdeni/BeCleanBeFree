@@ -11,7 +11,9 @@ class Profile(models.Model):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
     bio = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='profiles/', default='static/images/user-icon.png')
+    profile_pic = models.ImageField(upload_to='profiles/', default='profiles/user-icon.png')
+    specialization = models.CharField(max_length=255, blank=True, null=True)
+    availability = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"
@@ -127,3 +129,44 @@ class Report(models.Model):
 
     def __str__(self):
         return self.title
+    
+class ConsultationRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('completed', 'Completed'),
+        ('rejected', 'Rejected'),
+    ]
+    TYPE_CHOICES = [
+        ('video', 'Video'),
+        ('phone', 'Phone'),
+        ('in-person', 'In-Person'),
+    ]
+    URGENCY_CHOICES = [
+        ('normal', 'Normal'),
+        ('urgent', 'Urgent'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='consultation_requests')
+    counselor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='consultation_requests')
+    preferred_date = models.DateTimeField()
+    consultation_type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='video')
+    urgency = models.CharField(max_length=20, choices=URGENCY_CHOICES, default='normal')
+    notes = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.counselor.user.username} ({self.status})"
+
+class Consultation(models.Model):
+    request = models.ForeignKey(ConsultationRequest, on_delete=models.CASCADE, related_name='consultations')
+    date = models.DateTimeField()
+    duration = models.IntegerField()  # Duration in minutes
+    notes = models.TextField(blank=True, null=True)
+    feedback = models.TextField(blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)  # 1-5 scale
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Consultation: {self.request.user.username} with {self.request.counselor.user.username}"

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="col-span-12 xl:col-span-12 md:col-span-12">
+      <div class="card table-card">
+        <div class="card-header">
+          <h5>Appointments</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Preferred Date</th>
+                  <th>Type</th>
+                  <th>Urgency</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for request in requests %}
+                <tr class="unread">
+                  <td>
+                    <h6 class="mb-1">{{ request.user.username }}</h6>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ request.preferred_date|date:"d M Y H:i" }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ request.get_consultation_type_display }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ request.get_urgency_display }}</p>
+                  </td>
+                  <td>
+                    <h6 class="text-muted">
+                      <i class="fas fa-circle {% if request.status == 'accepted' or request.status == 'completed' %}text-success{% else %}text-danger{% endif %} text-[10px] ltr:mr-4 rtl:ml-4"></i>
+                      {{ request.get_status_display }}
+                    </h6>
+                  </td>
+                  <td>
+                    {% if request.status == 'pending' %}
+                    <a href="{% url 'accept_request' request.id %}" class="badge bg-theme-bg-2 text-white text-[12px] mx-2">Accept</a>
+                    <a href="{% url 'reject_request' request.id %}" class="badge bg-red-700 text-white text-[12px] mx-2">Reject</a>
+                    {% endif %}
+                    <a href="{% url 'consultation_details' request.id %}" class="badge bg-theme-bg-1 text-white text-[12px] mx-2">Details</a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="6">No appointments found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
