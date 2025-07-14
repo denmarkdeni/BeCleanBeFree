@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="col-span-12 xl:col-span-12 md:col-span-12">
+      <div class="card table-card">
+        <div class="card-header">
+          <h5>Question Details</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Correct Answer</th>
+                  <th>Attended By</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for question in questions %}
+                <tr class="unread">
+                  <td>
+                    <h6 class="mb-1">{{ question.question_text }}</h6>
+                  </td>
+                  <td>
+                    <p class="m-0">
+                        {% for option in question.options.all %}
+                            {% if option.is_correct %}
+                            {{ option.option_text }}
+                            {% endif %}
+                        {% empty %}
+                            No correct answer set
+                        {% endfor %}
+                    </p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ question.userquizresult_set.count }}</p>
+                  </td>
+                  <td>
+                    <p class="m-0">{{ question.created_at|date:"d M Y H:i" }}</p>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4">No questions found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

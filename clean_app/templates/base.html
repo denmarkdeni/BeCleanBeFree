@@ -130,7 +130,7 @@
           </ul>
         </li>
 
-    {% elif request.user.profile.role == 'counselor' %}
+    {% elif request.user.profile.role == 'counselor' and request.user.profile.is_verified %}
 
         <li class="pc-item">
             <a href="/dashboard/counselor" class="pc-link">
@@ -183,7 +183,7 @@
             <ul class="pc-submenu">
               <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Upload Quiz Category</a></li>
               <li class="pc-item"><a class="pc-link" href="{% url 'upload_question' %}">Upload Question</a></li>
-              <li class="pc-item"><a class="pc-link" href="{% url 'upload_quiz' %}">Review Quiz/Answers</a></li>
+              <li class="pc-item"><a class="pc-link" href="{% url 'question_details' %}">Review Quiz/Answers</a></li>
             </ul>
           </li>
           <li class="pc-item pc-hasmenu">

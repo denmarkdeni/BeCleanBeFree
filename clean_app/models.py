@@ -14,6 +14,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='profiles/', default='profiles/user-icon.png')
     specialization = models.CharField(max_length=255, blank=True, null=True)
     availability = models.TextField(blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"

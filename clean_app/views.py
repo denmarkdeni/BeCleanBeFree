@@ -18,6 +18,9 @@ def home(request):
     recovery_post_mental = RecoveryTipPost.objects.filter(category='mental').order_by('-created_at')[:10]
     recovery_post_physical = RecoveryTipPost.objects.filter(category='physical').order_by('-created_at')[:10]
     recovery_post_medicine = RecoveryTipPost.objects.filter(category='medicine').order_by('-created_at')[:10]
+    consultations = Consultation.objects.all()
+    quizzes = Quiz.objects.filter(status='active').order_by('-created_at')[:4]
+    counselors = Profile.objects.filter(role='counselor')
     context = {
         'awareness_posts': awareness_posts,
         'news_posts': news_posts,
@@ -26,6 +29,9 @@ def home(request):
         'recovery_post_mental': recovery_post_mental,
         'recovery_post_physical': recovery_post_physical,
         'recovery_post_medicine': recovery_post_medicine,
+        'consultations':consultations,
+        'quizzes':quizzes,
+        'counselors':counselors,
     }
     return render(request, 'home.html', context)
 
@@ -41,6 +47,8 @@ def register(request):
             if reg_form.is_valid():
                 user = reg_form.save()
                 role = reg_form.cleaned_data.get('role')
+                user.is_active = False
+                user.save()
                 user.profile.role = role
                 user.profile.save()
                 messages.success(request, 'Registration successful!')
@@ -48,7 +56,7 @@ def register(request):
             else:
                 messages.error(request, 'Registration failed. Please check the form.')
         elif form_type == 'login':
-            print(request.POST)
+            # print(request.POST)
             login_form = UserLoginForm(request, data=request.POST)
             if login_form.is_valid():
                 user = login_form.get_user()
@@ -69,7 +77,10 @@ def dashboard(request):
         if request.user.is_superuser:
             return redirect('admin_dashboard')
         elif request.user.profile.role == 'counselor':
-            return redirect('counselor_dashboard')
+            if request.user.profile.is_verified:
+                return redirect('counselor_dashboard')
+            else:
+                return render(request, 'profiles/unverified.html')
         elif request.user.profile.role == 'user':
             return redirect('user_dashboard')
     else:
@@ -197,7 +208,7 @@ def upload_awareness_post(request):
             title=title,
             content=content,
             image=image,
-            video_link=video_link,
+            source_link=video_link,
             posted_by=request.user,
             is_approved=False  # Wait for admin approval
         )
@@ -241,7 +252,7 @@ def upload_recovery_tip(request):
             content=content,
             category=category,
             image=image,
-            video_link=video_link,
+            source_link=video_link,
             posted_by=request.user,
             is_approved=False
         )
@@ -278,7 +289,7 @@ def upload_question(request):
         correct_option = request.POST.get('correct_option')
 
         quiz = Quiz.objects.get(id=quiz_id)
-        question = Question.objects.create(quiz=quiz, question_text=question_text)
+        question = Question.objects.create(quiz=quiz, question_text=question_text,uploaded_by=request.user)
 
         for idx, option_text in enumerate(options):
             is_correct = str(idx) == correct_option
@@ -376,6 +387,14 @@ def quiz_result(request):
     
     return render(request, 'quiz/quiz_result.html', context)
 
+@login_required
+def question_details(request):
+    if request.user.profile.role != 'counselor':
+        messages.error(request, 'Access denied. Only counselors can view this page.')
+        return redirect('user_profile')
+    questions = Question.objects.filter(uploaded_by=request.user).order_by('-created_at')
+    return render(request, 'quiz/question_details.html', {'questions': questions})
+
 def upload_report(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -402,15 +421,15 @@ def user_management(request):
 
 def activate_user(request, user_id):
     user = User.objects.get(id=user_id)
-    user.is_active = True
-    user.save()
+    user.profile.is_verified = True
+    user.profile.save()
     messages.success(request, f'{user.username} has been activated.')
     return redirect('user_management')
 
 def deactivate_user(request, user_id):
     user = User.objects.get(id=user_id)
-    user.is_active = False
-    user.save()
+    user.profile.is_verified = False
+    user.profile.save()
     messages.success(request, f'{user.username} has been deactivated.')
     return redirect('user_management')
 

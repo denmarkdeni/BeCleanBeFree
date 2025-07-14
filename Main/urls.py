@@ -59,6 +59,7 @@ urlpatterns = [
 
     path('quiz/attend/', views.attend_quiz, name='attend_quiz'),
     path('quiz/result/', views.quiz_result, name='quiz_result'),
+    path('question-details/', views.question_details, name='question_details'),
 
     path('view/awareness/', views.view_awareness_posts, name='view_awareness_posts'),
     path('view/news/', views.view_news_posts, name='view_news_posts'),

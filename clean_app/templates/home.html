@@ -362,9 +362,8 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
         </div>
         <!-- Dance Class End -->
 
-
-        <!-- Events Start -->
-        <div class="container-fluid events py-5"id="quiz-id">
+        <!-- Quiz Start -->
+        <div class="container-fluid events py-5" id="quiz-id">
             <div class="container py-5">
                 <div class="pb-5">
                     <div class="row g-4 align-items-end">
@@ -373,85 +372,38 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                             <h1 class="display-2 mb-0 wow fadeInUp" data-wow-delay="0.3s">Self-Assessment Quiz</h1>
                         </div>
                         <div class="col-xl-4 text-xl-end pb-3 wow fadeInUp" data-wow-delay="0.3s">
-                            <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="#">Get Started</a>
+                            <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="{% url 'register' %}">Get Started</a>
                         </div>
                     </div>
                 </div>
                 <div class="row g-4 justify-content-center">
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                    {% for quiz in quizzes %}
+                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.{{ forloop.counter|add:1 }}s">
                         <div class="event-item rounded">
                             <div class="position-relative">
-                                <img src="/static/img/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                                <div class="bg-primary text-white fw-bold rounded d-inline-block position-absolute p-2" style="top: 0; right: 0;">JAN 20</div>
+                                <img src="/static/img/quiz.jpg" class="img-fluid rounded-top w-100" alt="{{ quiz.title }}">
+                                <div class="bg-primary text-white fw-bold rounded d-inline-block position-absolute p-2" style="top: 0; right: 0;">{{ quiz.get_category_display }}</div>
                                 <div class="d-flex justify-content-between border-start border-end bg-white px-2 py-2 w-100 position-absolute" style="bottom: 0; left: 0; opacity: 0.8;">
-                                    <a href="#" class="text-dark"><i class="fas fa-clock text-primary"></i> 08:00AM - 10:00PM</a>
-                                    <a href="#" class="text-dark"><span class="fas fa-map-marker-alt text-primary"></span> New York</a>
+                                    <span class="text-dark"><i class="fas fa-clock text-primary"></i> {{ quiz.created_at|date:"d M Y" }}</span>
+                                    <span class="text-dark"><i class="fas fa-book text-primary"></i> {{ quiz.questions.count }} Questions</span>
                                 </div>
                             </div>
                             <div class="border border-top-0 rounded-bottom p-4">
-                                <a href="#" class="h4 mb-3 d-block">Open House - Springs Dance</a>
-                                <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Watch Now</a>
+                                <a href="{% url 'register' %}" class="h4 mb-3 d-block">{{ quiz.title }}</a>
+                                <p class="mb-3">{{ quiz.description|truncatewords:20 }}</p>
+                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="{% url 'register' %}">Start Quiz</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="event-item rounded">
-                            <div class="position-relative">
-                                <img src="/static/img/service-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                                <div class="bg-primary text-white rounded d-inline-block position-absolute p-2" style="top: 0; right: 0;">JUN 30</div>
-                                <div class="d-flex justify-content-between border-start border-end bg-white px-2 py-2 w-100 position-absolute" style="bottom: 0; left: 0; opacity: 0.8;">
-                                    <a href="#" class="text-dark"><i class="fas fa-clock text-primary"></i> 08:00AM - 10:00PM</a>
-                                    <a href="#" class="text-dark"><span class="fas fa-map-marker-alt text-primary"></span> New York</a>
-                                </div>
-                            </div>
-                            <div class="border rounded-bottom p-4">
-                                <a href="#" class="h4 mb-3 d-block">Open House And Registration</a>
-                                <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Watch Now</a>
-                            </div>
-                        </div>
+                    {% empty %}
+                    <div class="col-12 text-center">
+                        <p>No quizzes available at this time.</p>
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="event-item rounded">
-                            <div class="position-relative">
-                                <img src="/static/img/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                                <div class="bg-primary text-white rounded d-inline-block position-absolute p-2" style="top: 0; right: 0;">MAY 15</div>
-                                <div class="d-flex justify-content-between border-start border-end bg-white px-2 py-2 w-100 position-absolute" style="bottom: 0; left: 0; opacity: 0.8;">
-                                    <a href="#" class="text-dark"><i class="fas fa-clock text-primary"></i> 08:00AM - 10:00PM</a>
-                                    <a href="#" class="text-dark"><span class="fas fa-map-marker-alt text-primary"></span> New York</a>
-                                </div>
-                            </div>
-                            <div class="border rounded-bottom p-4">
-                                <a href="#" class="h4 mb-3 d-block">Open House Morris Dance</a>
-                                <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Watch Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="event-item rounded">
-                            <div class="position-relative">
-                                <img src="/static/img/service-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                                <div class="bg-primary text-white rounded d-inline-block position-absolute p-2" style="top: 0; right: 0;">APR 2</div>
-                                <div class="d-flex justify-content-between border-start border-end bg-white px-2 py-2 w-100 position-absolute" style="bottom: 0; left: 0; opacity: 0.8;">
-                                    <a href="#" class="text-dark"><i class="fas fa-clock text-primary"></i> 08:00AM - 10:00PM</a>
-                                    <a href="#" class="text-dark"><span class="fas fa-map-marker-alt text-primary"></span> New York</a>
-                                </div>
-                            </div>
-                            <div class="border rounded-bottom p-4">
-                                <a href="#" class="h4 mb-3 d-block">Open House Dance Studio</a>
-                                <p class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni vero excepturi blanditiis quidem</p>
-                                <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="#">Watch Now</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <!-- Events End -->
-
-
+        <!-- Quiz End -->
 
         <!-- Blogs Start -->
         <div class="container-fluid blog pb-5"id="news-id">
@@ -491,17 +443,18 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
         <!-- Blogs End -->
 
 
-        <!-- Team Start -->
-        <div class="container-fluid team pb-5"id="counselor-id">
+       <!-- Counselors Start -->
+        <div class="container-fluid team pb-5" id="counselor-id">
             <div class="container pb-5">
                 <div class="pb-5">
                     <h4 class="text-secondary sub-title fw-bold wow fadeInUp" data-wow-delay="0.1s">Counselors</h4>
                     <h1 class="display-2 mb-0 wow fadeInUp" data-wow-delay="0.3s">Our Professional Counselors</h1>
                 </div>
                 <div class="team-carousel owl-carousel pt-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.1s">
+                    {% for counselor in counselors %}
+                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.{{ forloop.counter|add:1 }}s">
                         <div class="team-img bg-secondary rounded-top">
-                            <img src="/static/img/team-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                            <img src="{{ counselor.profile_pic.url|default:'/static/images/user-icon.png' }}" class="img-fluid rounded-top w-100" alt="{{ counselor.user.username }}">
                             <div class="team-icon">
                                 <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -510,74 +463,20 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
                             </div>
                         </div>
                         <div class="team-content text-center p-4">
-                            <a href="#" class="h4">Emily Ava</a>
-                            <p class="mb-0 text-primary">Instructor</p>
+                            <a href="{% url 'request_consultation' counselor.id %}" class="h4">{{ counselor.user.username }}</a>
+                            <p class="mb-3 text-primary">{{ counselor.specialization|default:"Counselor" }}</p>
+                            <a class="btn btn-primary rounded-pill text-white py-2 px-4" href="{% url 'request_consultation' counselor.id %}">Request Consultation</a>
                         </div>
                     </div>
-                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-img bg-secondary rounded-top">
-                            <img src="/static/img/team-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <div class="team-icon">
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-content text-center p-4">
-                            <a href="#" class="h4">Emily Ava</a>
-                            <p class="mb-0 text-primary">Instructor</p>
-                        </div>
+                    {% empty %}
+                    <div class="text-center">
+                        <p>No counselors available at this time.</p>
                     </div>
-                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-img bg-secondary rounded-top">
-                            <img src="/static/img/team-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <div class="team-icon">
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-content text-center p-4">
-                            <a href="#" class="h4">Emily Ava</a>
-                            <p class="mb-0 text-primary">Instructor</p>
-                        </div>
-                    </div>
-                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-img bg-secondary rounded-top">
-                            <img src="/static/img/team-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <div class="team-icon">
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-content text-center p-4">
-                            <a href="#" class="h4">Emily Ava</a>
-                            <p class="mb-0 text-primary">Instructor</p>
-                        </div>
-                    </div>
-                    <div class="team-item border rounded wow fadeInUp" data-wow-delay="0.9s">
-                        <div class="team-img bg-secondary rounded-top">
-                            <img src="/static/img/team-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            <div class="team-icon">
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-content text-center p-4">
-                            <a href="#" class="h4">Emily Ava</a>
-                            <p class="mb-0 text-primary">Instructor</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <!-- Team End -->
+        <!-- Counselors End -->
 
         <!-- Video Gallery Start -->
         <div class="container-fluid gallery pb-5"id="recovery-id">
@@ -769,90 +668,48 @@ Section keeps users updated on anti-drug campaigns and enforcement actions.</p>
         <div class="container-fluid testimonial pb-5">
             <div class="container pb-5">
                 <div class="pb-5">
-                    <h4 class="text-secondary sub-title fw-bold wow fadeInUp" data-wow-delay="0.1s">OUR CLIENTS RIVIEWS</h4>
-                    <h1 class="display-2 mb-0 wow fadeInUp" data-wow-delay="0.3s">What Our Clients Say</h1>
+                    <h4 class="text-secondary sub-title fw-bold wow fadeInUp" data-wow-delay="0.1s">OUR USERS REVIEWS</h4>
+                    <h1 class="display-2 mb-0 wow fadeInUp" data-wow-delay="0.3s">What Our Users Say</h1>
                 </div>
                 <div class="owl-carousel testimonial-carousel pt-5 wow fadeInUp" data-wow-delay="0.2s">
+                    {% for consultation in consultations %}
+                    {% if consultation.feedback and consultation.rating %}
                     <div class="testimonial-item border text-center rounded">
                         <div class="rounded-circle position-absolute" style="width: 100px; height: 100px; top: 25px; left: 50%; transform: translateX(-50%);">
-                            <img class="img-fluid rounded-circle" src="/static/img/testimonial-1.jpg" alt="img">
+                            <img class="img-fluid rounded-circle" src="{{ consultation.request.user.profile.profile_pic.url|default:'/static/images/user-icon.png' }}" alt="{{ consultation.request.user.username }}">
                         </div>
                         <div class="position-relative" style="margin-top: 140px;">
-                            <h5 class="mb-0">Person Name</h5>
-                            <p>Profession</p>
+                            <h5 class="mb-0">{{ consultation.request.user.username }}</h5>
+                            <p>User</p>
                             <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star"></i>
+                                {% for i in "12345" %}
+                                <i class="fas fa-star {% if forloop.counter <= consultation.rating %}text-secondary{% else %}text-muted{% endif %}"></i>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="testimonial-content p-4">
-                            <p class="fs-5 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitati eiusmod tempor incididunt.
-                            </p>
+                            <p class="fs-5 mb-0">{{ consultation.feedback|truncatewords:30 }}</p>
                         </div>
                     </div>
+                    {% endif %}
+                    {% empty %}
                     <div class="testimonial-item border text-center rounded">
-                        <div class="rounded-circle position-absolute" style="width: 100px; height: 100px; top: 25px; left: 50%; transform: translateX(-50%);">
-                            <img class="img-fluid rounded-circle" src="/static/img/testimonial-2.jpg" alt="img">
-                        </div>
                         <div class="position-relative" style="margin-top: 140px;">
-                            <h5 class="mb-0">Person Name</h5>
-                            <p>Profession</p>
+                            <h5 class="mb-0">No Feedback Yet</h5>
+                            <p>User</p>
                             <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star text-muted"></i>
+                                <i class="fas fa-star text-muted"></i>
+                                <i class="fas fa-star text-muted"></i>
+                                <i class="fas fa-star text-muted"></i>
+                                <i class="fas fa-star text-muted"></i>
                             </div>
                         </div>
                         <div class="testimonial-content p-4">
-                            <p class="fs-5 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitati eiusmod tempor incididunt.
-                            </p>
+                            <p class="fs-5 mb-0">No user feedback available at this time.</p>
                         </div>
                     </div>
-                    <div class="testimonial-item border text-center rounded">
-                        <div class="rounded-circle position-absolute" style="width: 100px; height: 100px; top: 25px; left: 50%; transform: translateX(-50%);">
-                            <img class="img-fluid rounded-circle" src="/static/img/testimonial-3.jpg" alt="img">
-                        </div>
-                        <div class="position-relative" style="margin-top: 140px;">
-                            <h5 class="mb-0">Person Name</h5>
-                            <p>Profession</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="testimonial-content p-4">
-                            <p class="fs-5 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitati eiusmod tempor incididunt.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="testimonial-item border text-center rounded">
-                        <div class="rounded-circle position-absolute" style="width: 100px; height: 100px; top: 25px; left: 50%; transform: translateX(-50%);">
-                            <img class="img-fluid rounded-circle" src="/static/img/testimonial-3.jpg" alt="img">
-                        </div>
-                        <div class="position-relative" style="margin-top: 140px;">
-                            <h5 class="mb-0">Person Name</h5>
-                            <p>Profession</p>
-                            <div class="d-flex justify-content-center">
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="testimonial-content p-4">
-                            <p class="fs-5 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitati eiusmod tempor incididunt.
-                            </p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

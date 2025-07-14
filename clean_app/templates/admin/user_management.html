@@ -39,13 +39,13 @@
                   <td>
                     <h6 class="text-muted">
                       <i
-                        class="fas fa-circle {% if profile.user.is_active %}text-success{% else %}text-danger{% endif %} text-[10px] ltr:mr-4 rtl:ml-4"
+                        class="fas fa-circle {% if profile.user.profile.is_verified %}text-success{% else %}text-danger{% endif %} text-[10px] ltr:mr-4 rtl:ml-4"
                       ></i>
-                      {% if profile.user.is_active %}Active{% else %}Inactive{% endif %}
+                      {% if profile.user.profile.is_verified %}Active{% else %}Inactive{% endif %}
                     </h6>
                   </td>
                   <td>
-                    {% if profile.user.is_active %}
+                    {% if profile.user.profile.is_verified %}
                     <a
                       href="{% url 'deactivate_user' profile.user.id %}"
                       class="badge bg-theme-bg-1 text-white text-[12px] mx-2"
