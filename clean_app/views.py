@@ -47,8 +47,6 @@ def register(request):
             if reg_form.is_valid():
                 user = reg_form.save()
                 role = reg_form.cleaned_data.get('role')
-                user.is_active = False
-                user.save()
                 user.profile.role = role
                 user.profile.save()
                 messages.success(request, 'Registration successful!')
